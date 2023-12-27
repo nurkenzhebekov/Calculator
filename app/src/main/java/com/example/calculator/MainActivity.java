@@ -3,6 +3,7 @@ package com.example.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,10 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void onEqualClick(View view) {
         if (!operationTV.getText().toString().equals("0")) {
-            String secondText = operationTV.getText().toString().replaceAll("[^0-9-]", " ");
-            if (secondText.contains(" ")) {
-                String[] arrays = secondText.split(" ");
-                secondOperand = Integer.valueOf(arrays[1]);
+            String[] operands = operationTV.getText().toString().split("[-+×÷]");
+            if (operands.length > 1) {
+                secondOperand = Integer.valueOf(operands[1]);
+                if (operationTV.getText().toString().startsWith("-")) {
+                    secondOperand = -secondOperand;
+                }
+            } else {
+                Log.e("Calculator", "Error: Could not extract second operand.");
+                return;
             }
             if (operationTV.getText().toString().contains("+")) {
                 result = firstOperand + secondOperand;
