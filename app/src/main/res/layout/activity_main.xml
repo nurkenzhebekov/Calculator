@@ -14,9 +14,9 @@
         android:layout_height="0dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/operationTV"
             android:text="0"
-            android:textSize="80dp"
+            android:textSize="80sp"
             android:textColor="@color/white"
             android:layout_marginEnd="26dp"
             android:layout_gravity="bottom|end"
@@ -41,22 +41,26 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Grey.Button"
-                android:id="@+id/clearBT"
+                android:id="@+id/acBT"
                 android:onClick="onNumberClick"
                 android:text="AC"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Grey.Button"
+                android:id="@+id/plus_minusBT"
                 android:text="+/-"
                 android:layout_marginHorizontal="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Grey.Button"
+                android:id="@+id/percentBT"
                 android:text="%"
                 android:layout_marginEnd="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Orange.Button"
+                android:id="@+id/divideBT"
+                android:onClick="onOperationClick"
                 android:text="÷"/>
 
 
@@ -72,20 +76,25 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
+                android:onClick="onNumberClick"
                 android:text="7"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
                 android:text="8"
+                android:onClick="onNumberClick"
                 android:layout_marginHorizontal="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
                 android:text="9"
+                android:onClick="onNumberClick"
                 android:layout_marginEnd="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Orange.Button"
+                android:id="@+id/multiplyBT"
+                android:onClick="onOperationClick"
                 android:text="×"/>
 
         </LinearLayout>
@@ -99,20 +108,25 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
+                android:onClick="onNumberClick"
                 android:text="4"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
                 android:text="5"
+                android:onClick="onNumberClick"
                 android:layout_marginHorizontal="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
                 android:text="6"
+                android:onClick="onNumberClick"
                 android:layout_marginEnd="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Orange.Button"
+                android:id="@+id/minusBT"
+                android:onClick="onOperationClick"
                 android:text="-"/>
 
         </LinearLayout>
@@ -131,13 +145,14 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
-                android:onClick="onNumberClick"
                 android:text="2"
+                android:onClick="onNumberClick"
                 android:layout_marginHorizontal="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
                 android:text="3"
+                android:onClick="onNumberClick"
                 android:layout_marginEnd="18dp"/>
 
             <com.google.android.material.button.MaterialButton
@@ -160,17 +175,19 @@
                 android:layout_width="178dp"
                 android:textAlignment="textStart"
                 android:paddingStart="32dp"
+                android:onClick="onNumberClick"
                 android:text="0"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Dark.Grey.Button"
+                android:id="@+id/commaBT"
                 android:text=","
                 android:layout_marginHorizontal="18dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Orange.Button"
                 android:id="@+id/equalBT"
-                android:onClick="onOperationClick"
+                android:onClick="onEqualClick"
                 android:text="="/>
 
         </LinearLayout>

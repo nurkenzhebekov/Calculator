@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView;
-    private Integer firstOperand, secondOperand, sum;
+    private TextView operationTV;
+    private Integer firstOperand, secondOperand, result;
     private Boolean isOperationFinished;
 
     @Override
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.textView);
+        operationTV = findViewById(R.id.operationTV);
 
     }
 
@@ -27,35 +28,63 @@ public class MainActivity extends AppCompatActivity {
 
         String number = ((MaterialButton)view).getText().toString();
 
-        if (view.getId() == R.id.clearBT) {
-            textView.setText("0");
+        if (view.getId() == R.id.acBT) {
+            operationTV.setText("0");
             firstOperand = 0;
             secondOperand = 0;
-            sum = 0;
-        } else if(textView.getText().toString().equals("0") || isOperationFinished){
-            textView.setText(number);
+            result = 0;
+        } else if(operationTV.getText().toString().equals("0") || isOperationFinished){
+            operationTV.setText(number);
         } else {
-            textView.append(number);
+            operationTV.append(number);
         }
         isOperationFinished = false;
     }
 
     public void onOperationClick(View view) {
         if (view.getId() == R.id.plusBT) {
-            firstOperand = Integer.valueOf(textView.getText().toString());
-            textView.append("+");
-        } else if (view.getId() == R.id.equalBT) {
-            if (!textView.getText().toString().equals("0")) {
-                String secondText = textView.getText()
-                        .toString().replace("+", " ");
-                if (secondText.contains(" ")) {
-                    String [] arrays = secondText.split(" ");
-                    secondOperand = Integer.valueOf(arrays[1]);
-                }
-                sum = firstOperand + secondOperand;
-                textView.setText(sum.toString());
-                isOperationFinished = true;
-            }
+            firstOperand = Integer.valueOf(operationTV.getText().toString());
+            operationTV.append("+");
+        } else if (view.getId() == R.id.minusBT) {
+            firstOperand = Integer.valueOf(operationTV.getText().toString());
+            operationTV.append("-");
+        } else if (view.getId() == R.id.multiplyBT) {
+            firstOperand = Integer.valueOf(operationTV.getText().toString());
+            operationTV.append("×");
+        } else if (view.getId() == R.id.divideBT) {
+            firstOperand = Integer.valueOf(operationTV.getText().toString());
+            operationTV.append("÷");
         }
+        isOperationFinished = false;
+    }
+
+    public void onEqualClick(View view) {
+        if (!operationTV.getText().toString().equals("0")) {
+            String secondText = operationTV.getText().toString().replaceAll("[^0-9-]", " ");
+            if (secondText.contains(" ")) {
+                String[] arrays = secondText.split(" ");
+                secondOperand = Integer.valueOf(arrays[1]);
+            }
+            if (operationTV.getText().toString().contains("+")) {
+                result = firstOperand + secondOperand;
+            } else if (operationTV.getText().toString().contains("-")) {
+                result = firstOperand - secondOperand;
+            } else if (operationTV.getText().toString().contains("×")) {
+                result = firstOperand * secondOperand;
+            } else if (operationTV.getText().toString().contains("÷")) {
+                if (secondOperand != 0) {
+                    result = firstOperand / secondOperand;
+                } else {
+                    showZeroError("Division by zero is not allowed.");
+                    return;
+                }
+            }
+            operationTV.setText(result.toString());
+            isOperationFinished = true;
+        }
+    }
+
+    private void showZeroError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
